@@ -1,20 +1,20 @@
 import {
-    RACES_GET_REQUEST,
-    RACES_GET_SUCCESS,
-    RACES_GET_FAILURE,
+    SINGLE_RACES_GET_REQUEST,
+    SINGLE_RACES_GET_SUCCESS,
+    SINGLE_RACES_GET_FAILURE,
     LOADING_STATES,
 } from '../../data/constans';
 
 
 const initialState = {
     loadingState: {},
-    races: [],
+    singleRace: [],
 }
 
-function races(state = initialState, action) {
+function singleRace(state = initialState, action) {
     const newLoadingState = { ...state.loadingState};
     switch(action.type) {
-        case RACES_GET_REQUEST: 
+        case SINGLE_RACES_GET_REQUEST: 
         return {
             ...state,
             loadingState: {
@@ -22,18 +22,18 @@ function races(state = initialState, action) {
                 [action.type]: LOADING_STATES.LOADING,
             }
         }
-        case RACES_GET_SUCCESS: 
-        delete newLoadingState.RACES_GET_REQUEST;
+        case SINGLE_RACES_GET_SUCCESS: 
+        delete newLoadingState.SINGLE_RACES_GET_REQUEST;
         return {
             ...state,
-            races: action.payload,
+            singleRace: action.payload,
             loadingState: newLoadingState,
         }
-        case RACES_GET_FAILURE: 
-        delete newLoadingState.RACES_GET_REQUEST;
+        case SINGLE_RACES_GET_FAILURE: 
+        delete newLoadingState.SINGLE_RACES_GET_REQUEST;
         return {
             ...state,
-            races: {},
+            singleRace: {},
             loadingState: newLoadingState,
         }
 
@@ -42,4 +42,4 @@ function races(state = initialState, action) {
     }
 }
 
-export default races;
+export default singleRace;

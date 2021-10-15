@@ -1,32 +1,49 @@
 import React, { useEffect } from 'react';
+import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { RaceTitleWrap } from '../../../components';
+import SingleRace from '../SingleRace';
 import { connect  } from 'react-redux';
 import { fetchRaces } from '../../../data/actions/races.actions';
-
+import {fetchSingleRace} from '../../../data/actions/singleRace.actions'
 
 
 function RaceList({ races, fetchRaces }) {
+    // const racesFetchedList = races.map((singleRace) => (
+    //     singleRace.name
+    // ));
     useEffect(() => {
         fetchRaces();
-    }, [fetchRaces])
-console.log(races);
-    // const fetchAllRaces = async () => {
-    //     const response = await fetch('https://my-json-server.typicode.com/hdjfye/bet-api/races');
-    //     const data = await response.json();
-    //     console.log(data);
-    //     return data;
         
-    // } 
-    // fetchAllRaces();
+        
+    
+    },[fetchRaces])
 
+
+    const racesFetchedList = races ? races.map(elem => (
+        <li key={elem.id}>
+            <Link to={`/racedetail/${elem.id}`}>{elem.name}</Link>
+        </li>
+    )) : <div>Lista pusta</div>
 
     
     return (
-        <div>
-            <h1>główny komponent lista wyścigów</h1>
+        <>
+            <h1>Race betting App</h1>
             <RaceTitleWrap></RaceTitleWrap>
-            <h1></h1>
-        </div>
+            {/* { races.map(elem => (
+                <div key={elem.id}>{elem.name}</div>))
+            }
+         */}
+            <Router>
+                <ul>
+                    {racesFetchedList}
+                </ul>
+                <Switch>
+                    <Route path="/racedetail/:id" component={SingleRace}></Route>
+                </Switch>
+            </Router>
+            
+        </>
        
     )
 }
