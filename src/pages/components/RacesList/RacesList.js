@@ -4,23 +4,25 @@ import { RaceTitleWrap } from '../../../components';
 import SingleRace from '../SingleRace';
 import { connect  } from 'react-redux';
 import { fetchRaces } from '../../../data/actions/races.actions';
-import {fetchSingleRace} from '../../../data/actions/singleRace.actions'
+import {fetchSingleRace} from '../../../data/actions/singleRace.actions';
+import {fetchParticipiant} from '../../../data/actions/participiant.actions'
 
 
-function RaceList({ races, fetchRaces }) {
+function RaceList({ races, fetchRaces, fetchParticipiant, participiant }) {
     // const racesFetchedList = races.map((singleRace) => (
     //     singleRace.name
     // ));
     useEffect(() => {
         fetchRaces();
+        //fetchParticipiant(1)
         
         
     
-    },[fetchRaces])
+    },[fetchRaces, fetchParticipiant])
 
-
+//console.log(participiant)
     const racesFetchedList = races ? races.map(elem => (
-        <li key={elem.id}>
+        <li key={elem.id} >
             <Link to={`/racedetail/${elem.id}`}>{elem.name}</Link>
         </li>
     )) : <div>Lista pusta</div>
@@ -50,8 +52,10 @@ function RaceList({ races, fetchRaces }) {
 export default connect( state => {
     return {
       races: state.races.races,
+      participiant: state.participiant.participiant,
     }
 }, {
     fetchRaces,
+    fetchParticipiant
 }
   )(RaceList);

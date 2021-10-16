@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect  } from 'react-redux';
+import { fetchParticipiant } from '../../data/actions/participiant.actions';
 
-function TableElement({...props}) {
-    console.log(props);
+function TableElement({participiant, fetchParticipiant, props}) {
+
+    useEffect(() => {
+        console.log(props);
+    }, [fetchParticipiant])
+   
+    
     return (
-        <div>Tu jest tytuł</div>
+        <div>{props.listP}</div>
     )
 }
-export default TableElement;
+export default connect( (state, props) => {
+    return {
+      participiant: state.participiant.participiant,
+      props: props,
+    }
+}, {
+    fetchParticipiant,
+}
+  )(TableElement);
