@@ -5,8 +5,8 @@ import {
     setFirstPlace,
     setSecondPlace,
     setThirdPlace,
+    setBetAmount
 } from '../../../data/actions/singleRace.actions';
-import TableElement from '../../../components/TableElement/TableElement';
 import {fetchAllParti} from '../../../data/actions/allParti.actions';
 
 
@@ -23,7 +23,9 @@ function SingleRace( {
     setFirstPlace,
     setSecondPlace,
     setThirdPlace,
+    setBetAmount,
     }) {
+    const [betState, setBetState] = useState();
 
     useEffect(() => {
         fetchSingleRace(param.id);
@@ -37,9 +39,21 @@ function SingleRace( {
             ? singleRace.participants.find((elem) => elem === singleParti.id) : null );
 
             console.log(participantsInRace, firstPlace, secondPlace, thirdPlace);
+
+    const setAmountToStore = () => {
+        
+       setBetAmount(betState);
+    }
+    
+            
     return (
     <>
       <h1>{singleRace.name}</h1>
+      <label>
+        <span>Bet amount : </span>
+        <input type="number" onChange={e => setBetState(e.target.value)} />
+      </label>
+      <button onClick={() => setAmountToStore()}>submit</button>
       <table>
         <tr>
           <td>
@@ -104,6 +118,7 @@ export default  connect( (state, props) => {
       firstPlace: state.singleRace.firstPlace,
       secondPlace: state.singleRace.secondPlace,
       thirdPlace: state.singleRace.thirdPlace,
+      betAmount: state.singleRace.betAmount,
     }
 }, {
     fetchSingleRace,
@@ -111,5 +126,6 @@ export default  connect( (state, props) => {
     setFirstPlace,
     setSecondPlace,
     setThirdPlace,
+    setBetAmount,
 }
   )(SingleRace);

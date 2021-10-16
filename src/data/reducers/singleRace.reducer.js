@@ -5,6 +5,7 @@ import {
     SET_FIRST_PLACE,
     SET_SECOND_PLACE,
     SET_THIRD_PLACE,
+    SET_BET_AMOUNT,
     LOADING_STATES,
 } from '../../data/constans';
 
@@ -15,6 +16,7 @@ const initialState = {
     firstPlace: undefined,
     secondPlace: undefined,
     thirdPlace: undefined,
+    betAmount: undefined,
 }
 
 function singleRace(state = initialState, action) {
@@ -57,6 +59,11 @@ function singleRace(state = initialState, action) {
             ...state,
             thirdPlace: action.payload,
         };
+        case SET_BET_AMOUNT: 
+        return {
+            ...state,
+            betAmount: action.payload
+        }
         default: 
         return state;
     }

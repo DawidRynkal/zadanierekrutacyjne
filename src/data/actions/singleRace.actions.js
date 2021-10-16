@@ -5,6 +5,7 @@ import {
     SET_FIRST_PLACE,
     SET_SECOND_PLACE,
     SET_THIRD_PLACE,
+    SET_BET_AMOUNT,
 } from '../constans';
 import API from '../../data/fetch'
 
@@ -27,21 +28,31 @@ export const fetchSingleRace = ( id ) => async(dispatch) => {
         })
     }
 };
+
 export const setFirstPlace = (id) => async (dispatch) => {
     dispatch({
       type: SET_FIRST_PLACE,
       payload: id,
     });
   };
+  
   export const setSecondPlace = (id) => async (dispatch) => {
     dispatch({
       type: SET_SECOND_PLACE,
       payload: id,
     });
   };
+
   export const setThirdPlace = (id) => async (dispatch) => {
     dispatch({
       type: SET_THIRD_PLACE,
       payload: id,
     });
   };
+
+  export const setBetAmount = (id) => {
+      return {
+          type: SET_BET_AMOUNT,
+          payload: id
+      }
+  }
