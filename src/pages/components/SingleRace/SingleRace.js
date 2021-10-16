@@ -49,11 +49,13 @@ function SingleRace( {
     return (
     <>
       <h1>{singleRace.name}</h1>
-      <label>
-        <span>Bet amount : </span>
-        <input type="number" onChange={e => setBetState(e.target.value)} />
-      </label>
-      <button onClick={() => setAmountToStore()}>submit</button>
+      <div className="formBetWrap">
+        <label>
+            <span className="formText">Bet amount : </span>
+            <input className="inputBet" type="number" onChange={e => setBetState(e.target.value)} />
+        </label>
+        <button className="submitBet" onClick={() => setAmountToStore()}>submit</button>
+      </div>
       <table>
         <tr>
           <td>

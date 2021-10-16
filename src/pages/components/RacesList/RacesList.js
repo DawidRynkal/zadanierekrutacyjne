@@ -54,7 +54,9 @@ const RaceList = ({ fetchRaces, races }) => {
                     racesDisactiveList.map((elem) => (
                     <li className="racesLielem" key={elem.id}>
                         <Link className="linkToRace" to={`/racedetail/${elem.id}`}>{elem.name}</Link>
-                        <p>{elem.active ? "active" : "disactive"}</p>
+                        <p
+                        className={elem.active ? "greenColor" : "redColor"}
+                        >{elem.active ? "active" : "disactive"}</p>
                     </li>
                     ))
                 )}
@@ -66,7 +68,8 @@ const RaceList = ({ fetchRaces, races }) => {
                     racesActiveList.map((elem) => (
                     <li className="racesLielem" key={elem.id}>
                         <Link className="linkToRace" to={`/racedetail/${elem.id}`}>{elem.name}</Link>
-                        <p>{elem.active ? "active" : "disactive"}</p>
+                        <p className={elem.active ? "greenColor" : "redColor"}
+                        >{elem.active ? "active" : "disactive"}</p>
                     </li>
                     ))
                 )}
@@ -78,7 +81,8 @@ const RaceList = ({ fetchRaces, races }) => {
                     races.map((elem) => (
                     <li className="racesLielem" key={elem.id}>
                         <Link className="linkToRace" to={`/racedetail/${elem.id}`}>{elem.name}</Link>
-                        <p>{elem.active ? "active" : "disactive"}</p>
+                        <p className={elem.active ? "greenColor" : "redColor"}
+                        >{elem.active ? "active" : "disactive"}</p>
                     </li>
                     ))
                 )}
