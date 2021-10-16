@@ -5,8 +5,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import configureStore from './data/store';
+import { loadState, saveState } from './localStorage';
 
-const store = configureStore();
+const persistedState = loadState();
+const store = configureStore(
+  persistedState,
+);
+
+store.subscribe(() => {
+  saveState(store.getState())
+})
 
 ReactDOM.render(
   <Provider store={store}>
