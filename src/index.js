@@ -5,7 +5,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import configureStore from './data/store';
-import {ReactQueryProvider} from 'react-query'
 
 const store = configureStore();
 
