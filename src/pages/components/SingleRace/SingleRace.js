@@ -41,8 +41,32 @@ function SingleRace( {
             console.log(participantsInRace, firstPlace, secondPlace, thirdPlace);
 
     const setAmountToStore = () => {
-        
        setBetAmount(betState);
+    }
+    
+    const onClickForThird = (id) => {
+        if(id === firstPlace) {
+            setFirstPlace(undefined);
+        } else if(id === secondPlace) {
+            setSecondPlace(undefined)
+        }
+      setThirdPlace(id);
+    }
+    const onClickForSecond = (id) => {
+        if(id === firstPlace) {
+            setFirstPlace(undefined);
+        } else if(id === thirdPlace) {
+            setThirdPlace(undefined)
+        }
+      setSecondPlace(id)
+    }
+    const onClickForFirst = (id) => {
+        if(id === secondPlace) {
+            setSecondPlace(undefined);
+        } else if(id === thirdPlace) {
+            setThirdPlace(undefined)
+        }
+      setFirstPlace(id)
     }
     
             
@@ -82,10 +106,14 @@ function SingleRace( {
               <td>{participant.body}</td>
               <td>
                 <input
-                  onClick={() => setFirstPlace(participant.id)}
-                  type="radio"
+                  onClick={() => onClickForFirst(participant.id)}
+                  type={"radio"}
                   name={`firstPlace-${participant.id}`}
                   checked={participant.id === firstPlace}
+                //   disabled={
+                //     (participant.id === secondPlace  || participant.id === thirdPlace ) ?
+                //      true : false
+                //   }
                 />
               </td>
               <td>
@@ -93,7 +121,11 @@ function SingleRace( {
                   type="radio"
                   name={`secondPlace-${participant.id}`}
                   checked={participant.id === secondPlace}
-                  onClick={() => setSecondPlace(participant.id)}
+                //   disabled={
+                //     (participant.id === firstPlace  || participant.id === thirdPlace ) ?
+                //      true : false
+                //   }
+                  onClick={() => onClickForSecond(participant.id)}
                 />
               </td>
               <td>
@@ -101,7 +133,11 @@ function SingleRace( {
                   type="radio"
                   name={`thirdPlace-${participant.id}`}
                   checked={participant.id === thirdPlace}
-                  onClick={() => setThirdPlace(participant.id)}
+                //   disabled={
+                //     (participant.id === firstPlace  || participant.id === secondPlace ) ?
+                //      true : false
+                //   }
+                  onClick={() => onClickForThird(participant.id)}
                 />
               </td>
             </tr>

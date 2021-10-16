@@ -93,6 +93,7 @@ td {
     background-color: darkslategrey;
     color: white;
     border-radius: 4px;
+    
 }
 
 .inputBet {
@@ -102,6 +103,7 @@ td {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    outline: none;
 }
 
 .submitBet {
