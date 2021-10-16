@@ -2,7 +2,7 @@ import React from 'react';
 
 function RaceTitleWrap() {
     return (
-        <div>Tu jest tytuł</div>
+        <div className="subtitleRaces">Choose a Race </div>
     )
 }
 export default RaceTitleWrap;
