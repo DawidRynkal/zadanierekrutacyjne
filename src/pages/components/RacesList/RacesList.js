@@ -6,10 +6,7 @@ import { connect  } from 'react-redux';
 import { fetchRaces } from '../../../data/actions/races.actions';
 
 
-function RaceList({
-        fetchRaces, races, 
-    })
-     {
+const RaceList = ({ fetchRaces, races }) => {
 
     const [filterState, setFilterState] = useState('');
 
@@ -18,44 +15,76 @@ function RaceList({
 
     },[fetchRaces])
 
-    const racesFetchedList = races ? races.map(elem => (
-        <li className="racesLielem" key={elem.id} >
-            <Link className="linkToRace" to={`/racedetail/${elem.id}`}>{elem.name}</Link>
-        </li>
-    )) : <div>Lista pusta</div>
 
-    const activeFilterHandler = () => {
-        setFilterState(true);
+    const activeFilterHandler = (id) => {
+        setFilterState(id);
+        
     }
-
    
     const racesActiveList = races ? races.filter(race => race.active === true) : null;
-    console.log(racesActiveList);
+    const racesDisactiveList = races ? races.filter(race => race.active === false) : null;
+    console.log(races);
    
       
     
     return (
         <>
             <h1 className="mainAppTitle">Ireland Horse Racing</h1>
-            <RaceTitleWrap></RaceTitleWrap>
-            <Router>
-                <div className="ulWrap">
-                    <div className="filtersWrap">
-                        <p id="active" onClick={activeFilterHandler} className="filterElem activeFilter">active</p>
-                        <p id="disactive" className="filterElem">disactive</p>
-                    </div>
-                    <ul className="racesListWrap">
-                        {racesFetchedList}
-                    </ul>
-                    <ul className="racesListWrap">
-                        {/* {racesActiveList} */}
-                    </ul>
+            <div className="ulWrap">
+                <h2 className="subTitle">Filter Races :</h2>
+                <div className="filtersWrap">
+                    <p 
+                    id="active" 
+                    onClick={(e) => activeFilterHandler(e.target.id)}
+                    className={filterState === "active" ? "filterElem activeFilter" : "filterElem"}>active</p>
+                    <p 
+                    id="disactive" 
+                    onClick={(e) => activeFilterHandler(e.target.id)}
+                    className={filterState === "disactive" ? "filterElem activeFilter" : "filterElem"}>disactive</p>
+                    <p 
+                    id="all" 
+                    onClick={(e) => activeFilterHandler(e.target.id)}
+                    className={filterState === "all" ? "filterElem activeFilter" : "filterElem"}>all</p>
                 </div>
-                <Switch>
-                    <Route path="/racedetail/:id" component={SingleRace}></Route>
-                </Switch>
-            </Router>
-            
+                { filterState === "disactive" ?
+                ( <ul className="racesListWrap">
+                {racesDisactiveList.length < 1 ? (
+                    <div>Brak danych</div>
+                ) : (
+                    racesDisactiveList.map((elem) => (
+                    <li className="racesLielem" key={elem.id}>
+                        <Link className="linkToRace" to={`/racedetail/${elem.id}`}>{elem.name}</Link>
+                        <p>{elem.active ? "active" : "disactive"}</p>
+                    </li>
+                    ))
+                )}
+                </ul>) : filterState === "active" ?
+               ( <ul className="racesListWrap">
+                {racesActiveList.length < 1 ? (
+                    <div>Brak danych</div>
+                ) : (
+                    racesActiveList.map((elem) => (
+                    <li className="racesLielem" key={elem.id}>
+                        <Link className="linkToRace" to={`/racedetail/${elem.id}`}>{elem.name}</Link>
+                        <p>{elem.active ? "active" : "disactive"}</p>
+                    </li>
+                    ))
+                )}
+                </ul>) : 
+                (<ul className="racesListWrap">
+                {races.length < 1 ? (
+                    <div>Brak danych</div>
+                ) : (
+                    races.map((elem) => (
+                    <li className="racesLielem" key={elem.id}>
+                        <Link className="linkToRace" to={`/racedetail/${elem.id}`}>{elem.name}</Link>
+                        <p>{elem.active ? "active" : "disactive"}</p>
+                    </li>
+                    ))
+                )}
+            </ul>)
+                }
+            </div>
         </>
        
     )
@@ -69,3 +98,6 @@ export default connect( state => {
     fetchRaces,
 }
   )(RaceList);
+
+
+  

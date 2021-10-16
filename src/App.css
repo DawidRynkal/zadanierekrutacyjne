@@ -1,6 +1,18 @@
 body {
     background-color: black;
 }
+table,
+th,
+td {
+  border: 1px solid white;
+  border-radius: 4px;
+  border-collapse: collapse;
+  padding: 10px;
+  background-color: darkslategrey;
+}
+td {
+
+}
 .App {
     color:white ;
     padding: 20px;
@@ -24,18 +36,22 @@ body {
     padding: 10px 15px;
     margin: 15px 0;
     border-radius: 4px;
-    cursor: pointer;
-    transition: all .2s ease;
-    -webkit-transition: all .2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.racesLielem:hover {
-    border: 1px solid transparent;
+.linkToRace:hover {
+    transform: scale(1.03);
+    border-bottom: 1px solid white;
 }
 
 .linkToRace {
     color: white;
     text-decoration: none;
     text-transform: uppercase;
+    cursor: pointer;
+    transition: all .2s ease;
+    -webkit-transition: all .2s ease;
 }
 
 .subtitleRaces {
@@ -45,8 +61,13 @@ body {
 
 .filtersWrap {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
     padding: 0 10px;
+    width: 50%;
+}
+
+.subTitle {
+    padding: 0 15px;
 }
 
 .filterElem {
@@ -54,6 +75,9 @@ body {
     text-transform: uppercase;
     border: 1px solid transparent;
     cursor: pointer;
+}
+.filterElem:hover {
+    border-bottom: 1px solid white;
 }
 
 .activeFilter {
